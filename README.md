@@ -36,3 +36,27 @@ Run the following commands
   make
   sudo make install
   ```
+
+# Installation Instructions For Qt (Linux)
+
+1. For python, just run 
+
+  ```
+  sudo apt-get install python-qt4
+  ```
+  
+2. For C++,
+  * cd ~
+  * Dowloading Qt - wget https://download.qt.io/archive/qt/4.8/4.8.6/qt-everywhere-opensource-src-4.8.6.tar.gz
+  * Building Qt
+    
+    ```
+    tar -xvzf qt-everywhere-opensource-src-4.8.6.tar.gz
+    cd qt-everywhere-opensource-src-4.8.6
+    ./configure -prefix /usr/local/qt4
+    make
+    sudo make install
+    PATH=/usr/local/qt4/bin:$PATH
+    export PATH
+    ```
+  * Installing qmake - sudo apt-get install qt4-qmake
