@@ -60,3 +60,25 @@ Run the following commands
     export PATH
     ```
   * Installing qmake - sudo apt-get install qt4-qmake
+
+# Running Insturctions
+
+1. Running Python Version
+  
+  ```
+  pip install -r requirements.txt
+  python draw.py
+  ```
+2. For C++ Version
+  
+  ```
+  qmake-qt4 -project && qmake-qt4
+  make
+  ```
+  * Append following lines to the generated .pro file:
+    
+    ```
+    CONFIG += c++11
+    INCLUDEPATH += "/usr/local/include/opencv2"
+    LIBS += `pkg-config --cflags --libs opencv
+    ```
