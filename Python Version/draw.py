@@ -141,6 +141,8 @@ class ShowVideo(QtCore.QObject):
 
             elif self.x_pos < 90 and self.y_pos > 130 and self.y_pos < 390:
                 self.line_thickness = 6 - (self.y_pos//60 - 1)
+                if(self.line_thickness == 1):
+                    self.line_thickness = 2
 
             stream = "%d" % self.line_thickness
             cv2.cv.PutText(frame, stream, (40, 255), self.font, self.line_color)
@@ -152,7 +154,7 @@ class ShowVideo(QtCore.QObject):
 
             if magnitude > 0 and magnitude < 100 and self.x_pos > 120 and self.x_pos < 530:
                 if self.line_color == white:
-                    cv2.cv.Line(self.drawing, (int(self.x_pos), int(self.y_pos)), (int(last_x), int(last_y)), self.line_color, int(self.line_thickness)+6, cv2.cv.CV_AA)
+                    cv2.cv.Line(self.drawing, (int(self.x_pos), int(self.y_pos)), (int(last_x), int(last_y)), self.line_color, int(self.line_thickness)+2, cv2.cv.CV_AA)
                 else:
                     cv2.cv.Line(self.drawing, (int(self.x_pos), int(self.y_pos)), (int(last_x), int(last_y)), self.line_color, int(self.line_thickness), cv2.cv.CV_AA)
 
@@ -160,8 +162,15 @@ class ShowVideo(QtCore.QObject):
 
             cv2.cv.And(frame, self.drawing, frame)
             cv2.cv.And(self.image_panel, frame, frame)
+            
             if self.edit_mode == True:
                 cv2.cv.And(self.edit_image, frame, frame)
+
+            if(self.line_color == white):
+                cv2.cv.Rectangle(frame, (int(self.x_pos), int(self.y_pos)), (int(self.x_pos)+int(self.line_thickness)*4, int(self.y_pos)+4), black)
+                cv2.cv.Rectangle(frame, (int(self.x_pos), int(self.y_pos)+4), (int(self.x_pos)+int(self.line_thickness)*4, int(self.y_pos)+4+int(self.line_thickness)*8), black)
+            else:
+                cv2.cv.Circle(frame, (int(self.x_pos), int(self.y_pos)), int(self.line_thickness)+8, black)
 
             if self.drawing != None:
                 self.drawing_matrix = cv2.cv.GetMat(self.drawing)
