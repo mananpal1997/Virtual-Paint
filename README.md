@@ -82,3 +82,9 @@ Run the following commands
     INCLUDEPATH += "/usr/local/include/opencv2"
     LIBS += `pkg-config --cflags --libs opencv
     ```
+
+## TODO
+  - [ ] Drag and drop images
+  - [ ] Improve paint panel
+  - [ ] Implement a dynamic color pallete
+  - [ ] Implement hand and finger tracking
