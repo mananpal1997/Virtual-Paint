@@ -90,12 +90,12 @@ class ShowVideo(QtCore.QObject):
 
             area = cv2.cv.GetCentralMoment(moments, 0, 0)
             if area == 0:
-                area = 0.000000000000000001
+                continue
             
             last_x, last_y = int(self.x_pos), int(self.y_pos)
             self.x_pos, self.y_pos = 0, 0
 
-            if moment10/area >= 0 and moment10/area < 1280 and moment01/area >= 0 and moment01/area < 1280 and area > self.area_limit:
+            if moment10/area >= 0 and moment10/area < 640 and moment01/area >= 0 and moment01/area < 480 and area > self.area_limit:
                 self.x_pos = moment10//area
                 self.y_pos = moment01//area
 
@@ -167,8 +167,8 @@ class ShowVideo(QtCore.QObject):
                 cv2.cv.And(self.edit_image, frame, frame)
 
             if(self.line_color == white):
-                cv2.cv.Rectangle(frame, (int(self.x_pos), int(self.y_pos)), (int(self.x_pos)+int(self.line_thickness)*4, int(self.y_pos)+4), black)
-                cv2.cv.Rectangle(frame, (int(self.x_pos), int(self.y_pos)+4), (int(self.x_pos)+int(self.line_thickness)*4, int(self.y_pos)+4+int(self.line_thickness)*8), black)
+                cv2.cv.Rectangle(frame, (int(self.x_pos)-int(self.line_thickness)*2, int(self.y_pos)), (int(self.x_pos)+int(self.line_thickness)*2, int(self.y_pos)+4), black)
+                cv2.cv.Rectangle(frame, (int(self.x_pos)-int(self.line_thickness)*2, int(self.y_pos)+4), (int(self.x_pos)+int(self.line_thickness)*2, int(self.y_pos)+4+int(self.line_thickness)*8), black)
             else:
                 cv2.cv.Circle(frame, (int(self.x_pos), int(self.y_pos)), int(self.line_thickness)+8, black)
 
