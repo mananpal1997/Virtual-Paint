@@ -333,6 +333,12 @@ class Main(QtGui.QMainWindow):
         else:
             self.vid.edit_mode = False
         self.start()
+    def closeEvent(self,event):
+        reply = QtGui.QMessageBox.question(self, 'Message',"Are you sure to quit?", QtGui.QMessageBox.Yes | QtGui.QMessageBox.No, QtGui.QMessageBox.No)
+        if reply == QtGui.QtMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
     
 if __name__ == '__main__':
 
