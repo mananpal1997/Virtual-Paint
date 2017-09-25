@@ -80,7 +80,7 @@ Run the following commands
     ```
     CONFIG += c++11
     INCLUDEPATH += "/usr/local/include/opencv2"
-    LIBS += `pkg-config --cflags --libs opencv
+    LIBS += `pkg-config --cflags --libs opencv`
     ```
 
 ## TODO
